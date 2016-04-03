@@ -20,8 +20,8 @@ shinyServer(
                                   minbucket=input$minbucket) })
     myprediction<-reactive({predict(decisiontree(),newdata=mytest(),type="class")})
     acc<-reactive({confusionMatrix(myprediction(),mytest()$Species)})
-    output$Fit <- renderPrint({acc()})
-    
+    output$Fit1 <- renderPrint({acc()$table})
+    output$Fit2 <- renderPrint({acc()$overall[1]})
     output$CTree <- renderPlot({
       fancyRpartPlot(decisiontree())
     })
